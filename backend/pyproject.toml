@@ -1,0 +1,16 @@
+[project]
+name = "dineflow-backend"
+version = "0.1.0"
+description = "DineFlow - Multi-Tenant SaaS Restaurant Operating System API"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "N", "UP"]

@@ -1,0 +1,1 @@
+INSERT INTO plans (id, name, slug, monthly_price, annual_price, max_tables, max_staff, has_analytics, has_feedback, has_payments, features, is_active, created_at, updated_at) VALUES (gen_random_uuid(), 'Free', 'free', 0.00, 0.00, 5, 3, false, true, false, '{"description": "Basic restaurant management"}'::jsonb, true, NOW(), NOW());

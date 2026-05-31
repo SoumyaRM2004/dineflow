@@ -1,5 +1,7 @@
 """Pydantic schemas for restaurant profile management."""
 
+from datetime import datetime
+from uuid import UUID
 from pydantic import BaseModel, EmailStr, Field
 
 
@@ -26,18 +28,18 @@ class RestaurantUpdate(BaseModel):
 class RestaurantResponse(BaseModel):
     """Public restaurant profile response."""
 
-    id: str
+    id: UUID
     name: str
     slug: str
-    logo_url: str | None
-    address: str | None
-    phone: str | None
-    email: str | None
-    tax_details: dict | None
+    logo_url: str | None = None
+    address: str | None = None
+    phone: str | None = None
+    email: str | None = None
+    tax_details: dict | None = None
     timezone: str
     currency: str
     is_active: bool
-    created_at: str
-    updated_at: str
+    created_at: datetime
+    updated_at: datetime
 
     model_config = {"from_attributes": True}

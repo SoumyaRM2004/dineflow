@@ -14,6 +14,8 @@ from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from fastapi.staticfiles import StaticFiles
+
 from app.core.config import settings
 from app.core.exceptions import DineFlowException
 from app.api.v1.router import router as v1_router
@@ -23,6 +25,9 @@ from app.api.v1.router import router as v1_router
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     """Application lifecycle — startup and shutdown hooks."""
     # Startup
+    import os
+    os.makedirs("static/uploads/logos", exist_ok=True)
+
     db_host = settings.DATABASE_URL.split("@")[-1] if "@" in settings.DATABASE_URL else "configured"
     print(f"[DineFlow] Starting {settings.APP_NAME} v{settings.APP_VERSION}")
     print(f"[DineFlow] Environment: {settings.ENVIRONMENT}")
@@ -80,6 +85,9 @@ def create_app() -> FastAPI:
 
     # Include API routers
     app.include_router(v1_router)
+
+    # Mount static files
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 
     # Health check
     @app.get("/health", tags=["Health"])

@@ -3,12 +3,14 @@
 from fastapi import APIRouter
 
 from app.api.v1.auth import router as auth_router
+from app.api.v1.restaurants import router as restaurants_router
 
 # Aggregate v1 router
 router = APIRouter(prefix="/api/v1")
 
 # Module routers
 router.include_router(auth_router)
+router.include_router(restaurants_router)
 
 # Future module routers will be added here:
 # router.include_router(restaurants_router)
